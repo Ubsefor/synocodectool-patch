@@ -22,6 +22,7 @@ declare -A binhash_version_list=(
     ["18461b62813166652fd64a96e06237fde81925f7"]="7.1.1-42962-0_7.1.1-42962-6"
     ["d316d5b2b080346b4bc197ad5ad7994ac043a15d"]="7.2-64570-0_7.2-64570-1"
     ["a205aa337d808213cf6d4d839b035cde0237b424"]="7.2.1-69057-0_7.2.1-69057-5"
+    ["a205aa337d808213cf6d4d839b035cde0237b424"]="7.2.2-any"
 )
 
 declare -A patchhash_binhash_list=(
@@ -186,6 +187,7 @@ declare -a versions_list=(
     "7.2.1 69057-3"
     "7.2.1 69057-4"
     "7.2.1 69057-5"
+    "7.2.2 any"
 )
 
 #functions
@@ -253,7 +255,12 @@ done
 
 patch_common () {
     source "/etc/VERSION"
-    dsm_version="$productversion $buildnumber-$smallfixnumber"
+    if [[ "$productversion" == "7.2.2" ]]
+        dsm_version="$productversion any"
+    else 
+        dsm_version="$productversion $buildnumber-$smallfixnumber"
+    fi
+    
     if [[ ! "$dsm_version" ]] ; then
         echo "Something went wrong. Could not fetch DSM version"
         exit 1
