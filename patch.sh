@@ -187,7 +187,7 @@ declare -a versions_list=(
     "7.2.1 69057-3"
     "7.2.1 69057-4"
     "7.2.1 69057-5"
-    "7.2.2 any"
+    "7.2.2"
 )
 
 #functions
@@ -255,8 +255,8 @@ done
 
 patch_common () {
     source "/etc/VERSION"
-    if [[ "$productversion" == "7.2.2" ]]
-        dsm_version="$productversion any"
+    if [[ "$productversion" == "7.2.2"]] ; then
+        dsm_version="$productversion"
     else 
         dsm_version="$productversion $buildnumber-$smallfixnumber"
     fi
